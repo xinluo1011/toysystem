@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ToyDao">
+<!--    <resultMap id="resultToyUserService" type="com.example.demo.pojo.Toy">-->
+<!--        <id property="toyid" column="toyid"/>-->
+<!--        <result property="name" column="name"/>-->
+<!--        <result property="price" column="price"/>-->
+<!--        <result property="photo" column="photo"/>-->
+<!--        <association property="user" javaType="com.example.demo.pojo.User">-->
+<!--            <id property="id" column="id"/>-->
+<!--            <result property="username" column="username"/>-->
+<!--            <result property="password" column="password"/>-->
+<!--            <result property="state" column="state"/>-->
+<!--            <result property="telephone" column="telephone"/>-->
+<!--            <result property="address" column="address"/>-->
+<!--        </association>-->
+<!--    </resultMap>-->
+    <select id="getToysByUser" resultType="com.example.demo.pojo.Toy" parameterType="int">
+        SELECT * FROM TOY  WHERE  id=#{id}
+    </select>
+    <select id="getToysByCid" parameterType="java.lang.Integer" resultType="java.util.Map">
+        SELECT * FROM TOY WHERE cid=#{cid}
+    </select>
+    <select id="findAll" resultType="com.example.demo.pojo.Toy">
+        SELECT * FROM TOY
+    </select>
+    <insert id="addToy" useGeneratedKeys="true" keyProperty="toyid">
+        INSERT INTO TOY(name,id,price,photo,cid)
+        VALUES (#{name},#{id},#{price},#{photo},#{cid})
+    </insert>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        DELETE FROM TOY WHERE toyid=#{toyid}
+    </delete>
+    <update id="editToy" parameterType="com.example.demo.pojo.Toy">
+        UPDATE TOY SET name=#{name},price=#{price},photo=#{photo},cid=#{cid} WHERE toyid=#{toyid}
+    </update>
+    <select id="getToysById" resultType="com.example.demo.pojo.Toy">
+        SELECT * FROM TOY WHERE toyid=#{toyid}
+    </select>
+    <select id="Search" resultType="com.example.demo.pojo.Toy">
+        SELECT * FROM TOY WHERE name like concat('%',#{name},'%')
+    </select>
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        DELETE FROM TOY WHERE id=#{id}
+    </delete>
+</mapper>

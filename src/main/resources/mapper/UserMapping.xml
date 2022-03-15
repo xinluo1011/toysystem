@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.UserDao">
+<!--   查找用户 -->
+    <select id="findUser" resultType="com.example.demo.pojo.User" >
+        SELECT * FROM USER WHERE username=#{username} AND password=#{password}
+    </select>
+<!--    添加用户-->
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO USER(username,password,telephone,address)
+        VALUE (#{username},#{password},#{telephone},#{address})
+    </insert>
+     <select id="findUserByName" resultType="com.example.demo.pojo.User">
+         SELECT * FROM USER WHERE username=#{username}
+     </select>
+    <update id="editUser">
+        UPDATE USER SET username=#{username},password=#{password},telephone=#{telephone},address=#{address} WHERE id=#{id}
+    </update>
+    <select id="Search" resultType="com.example.demo.pojo.User">
+        SELECT * FROM USER WHERE username like concat('%',#{username},'%')
+    </select>
+    <select id="findAll" resultType="com.example.demo.pojo.User">
+        SELECT * FROM USER
+    </select>
+    <select id="findUserById" resultType="com.example.demo.pojo.User">
+        SELECT * FROM USER WHERE id=#{id}
+    </select>
+    <update id="updateState">
+        UPDATE USER SET state =#{state} WHERE id=#{id}
+    </update>
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+        DELETE FROM USER WHERE id=#{id}
+    </delete>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.ToyorderDao">
+    <select id="findByBid" resultType="com.example.demo.pojo.Toyorder" >
+        SELECT * FROM TOYORDER  WHERE  bname=#{bname}
+    </select>
+    <select id="findBySid" resultType="com.example.demo.pojo.Toyorder" parameterType="int">
+        SELECT * FROM TOYORDER  WHERE  sid=#{sid}
+    </select>
+    <insert id="addOrder" useGeneratedKeys="true" keyProperty="oid">
+        INSERT INTO TOYORDER(tid,name,price,bname,sid)
+        VALUES (#{tid},#{name},#{price},#{bname},#{sid})
+    </insert>
+</mapper>
